@@ -1,0 +1,19 @@
+{
+  "name": "linkai-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luishsilva09/LinkAi-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luishsilva09/LinkAi-back/issues"
+  },
+  "homepage": "https://github.com/luishsilva09/LinkAi-back#readme"
+}
