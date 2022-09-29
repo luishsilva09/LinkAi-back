@@ -8,7 +8,9 @@ export async function create(req: Request, res: Response) {
   res.status(201).send("Criado com sucesso");
 }
 export async function get(req: Request, res: Response) {
-  res.status(200).send("Links usuario");
+  const userInfo = decodeToken(req.headers.authorization);
+  const result = await linksService.get(userInfo.id);
+  res.status(200).send(result);
 }
 export async function deleteLink(req: Request, res: Response) {
   res.status(201).send("Deletado com sucesso");
