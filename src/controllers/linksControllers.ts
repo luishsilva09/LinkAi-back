@@ -18,3 +18,9 @@ export async function deleteLink(req: Request, res: Response) {
   await linksService.deleteLink(linkId, userInfo.id);
   res.status(200).send("Deletado com sucesso");
 }
+
+export async function viewLinks(req: Request, res: Response) {
+  const userId: number = Number(req.params.userId);
+  const result = await linksService.viewLinks(userId);
+  res.status(200).send(result);
+}

@@ -27,3 +27,10 @@ export async function deleteLink(linkId: number, userId: number) {
 
   await linksRepositories.deleteLink(linkId);
 }
+
+export async function viewLinks(userId: number) {
+  await findUser(userId);
+  const result = await linksRepositories.viewLinks(userId);
+
+  return result;
+}

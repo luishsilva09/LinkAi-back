@@ -21,3 +21,21 @@ export async function get(userId: number) {
 export async function deleteLink(linkId: number) {
   await prisma.link.delete({ where: { id: linkId } });
 }
+
+export async function viewLinks(userId: number) {
+  return await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      name: true,
+      links: {
+        select: {
+          id: true,
+          originalLink: true,
+          tag: true,
+        },
+      },
+    },
+  });
+}
