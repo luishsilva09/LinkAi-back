@@ -4,6 +4,9 @@ import { IlinkData } from "../types/linksTypes";
 export async function findUser(userId: number) {
   return await prisma.user.findUnique({ where: { id: userId } });
 }
+export async function findLink(linkId: number) {
+  return await prisma.link.findUnique({ where: { id: linkId } });
+}
 
 export async function create(linkData: IlinkData, userId: number) {
   await prisma.link.create({ data: { ...linkData, userId, acessCount: 0 } });
