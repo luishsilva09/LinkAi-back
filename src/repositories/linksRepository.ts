@@ -17,3 +17,7 @@ export async function get(userId: number) {
     select: { id: true, originalLink: true, tag: true, acessCount: true },
   });
 }
+
+export async function deleteLink(linkId: number) {
+  await prisma.link.delete({ where: { id: linkId } });
+}

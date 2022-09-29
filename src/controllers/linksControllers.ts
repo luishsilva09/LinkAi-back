@@ -13,5 +13,8 @@ export async function get(req: Request, res: Response) {
   res.status(200).send(result);
 }
 export async function deleteLink(req: Request, res: Response) {
-  res.status(201).send("Deletado com sucesso");
+  const userInfo = decodeToken(req.headers.authorization);
+  const linkId: number = Number(req.params.linkId);
+  await linksService.deleteLink(linkId, userInfo.id);
+  res.status(200).send("Deletado com sucesso");
 }
