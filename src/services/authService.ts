@@ -39,5 +39,11 @@ export async function signin(signinData: signinData) {
 
   const token = jwt.sign({ id: userData.id, name: userData.name }, secretKey);
 
-  return { token };
+  const result = {
+    name: userData.name,
+    email: userData.email,
+    urlId: userData.urlId,
+    token,
+  };
+  return result;
 }
