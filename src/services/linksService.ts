@@ -1,6 +1,7 @@
 import * as linksRepositories from "../repositories/linksRepository";
 import { IlinkData } from "../types/linksTypes";
 import { notFoundError, unauthorizedError } from "../utils/errorUtils";
+import urlMetadata from "url-metadata";
 
 async function findUser(userId: number) {
   const result = await linksRepositories.findUser(userId);
@@ -10,7 +11,16 @@ async function findUser(userId: number) {
 
 export async function create(linkData: IlinkData, userId: number) {
   await findUser(userId);
-  await linksRepositories.create(linkData, userId);
+  const previewImage = await urlMetadata(linkData.originalLink).then(
+    (result) => {
+      return result.image;
+    }
+  );
+  const insertData = {
+    ...linkData,
+    previewImage,
+  };
+  await linksRepositories.create(insertData, userId);
 }
 
 export async function get(userId: number) {
