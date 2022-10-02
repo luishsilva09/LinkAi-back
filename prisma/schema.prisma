@@ -27,6 +27,7 @@ model Link {
   originalLink String
   tag String
   acessCount Int
+  previewImage String
   user User @relation(fields: [userId],references: [id])
   userId Int
 
