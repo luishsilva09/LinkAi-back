@@ -13,6 +13,7 @@ export async function create(userData: IinserData) {
       email: userData.email,
       password: userData.password,
       urlId: userData.urlId,
+      imageUrl: userData.imageUrl,
     },
   });
 }

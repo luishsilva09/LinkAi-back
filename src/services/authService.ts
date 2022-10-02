@@ -18,13 +18,14 @@ export async function signup(newUserData: IuserData) {
   if (userData) throw unauthorizedError("Não autorizado");
 
   const cryptPassword = bcrypt.hashSync(newUserData.password, 10);
-  const inserData = {
+  const insertData = {
     name: newUserData.name,
     email: newUserData.email,
     password: cryptPassword,
     urlId: uuid(),
+    imageUrl: newUserData.imageUrl,
   };
-  await authRepository.create(inserData);
+  await authRepository.create(insertData);
 }
 
 export async function signin(signinData: signinData) {
@@ -37,7 +38,7 @@ export async function signin(signinData: signinData) {
   );
   if (!confirmPassword) throw unauthorizedError("Verifique seus dados");
 
-  const token = jwt.sign({ id: userData.id, name: userData.name }, secretKey);
+  const token = jwt.sign({ ...userData }, secretKey);
 
   const result = {
     name: userData.name,
@@ -45,5 +46,5 @@ export async function signin(signinData: signinData) {
     urlId: userData.urlId,
     token,
   };
-  return result;
+  return token;
 }
