@@ -16,6 +16,7 @@ model User {
   email String @unique
   password String
   urlId String @unique
+  imageUrl String
   links Link[]
 
   @@map("users")
