@@ -28,10 +28,10 @@ export async function deleteLink(linkId: number) {
   await prisma.link.delete({ where: { id: linkId } });
 }
 
-export async function viewLinks(userId: number) {
+export async function viewLinks(urlId: string) {
   return await prisma.user.findUnique({
     where: {
-      id: userId,
+      urlId: urlId,
     },
     select: {
       name: true,

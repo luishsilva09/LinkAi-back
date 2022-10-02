@@ -14,6 +14,6 @@ linksRoute.post(
 );
 linksRoute.get("/links", validToken, linksController.get);
 linksRoute.delete("/links/:linkId", validToken, linksController.deleteLink);
-linksRoute.get("/links/view/:userId", linksController.viewLinks);
+linksRoute.get("/links/view/:urlId", linksController.viewLinks);
 
 export default linksRoute;

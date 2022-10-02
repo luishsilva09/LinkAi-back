@@ -20,7 +20,8 @@ export async function deleteLink(req: Request, res: Response) {
 }
 
 export async function viewLinks(req: Request, res: Response) {
-  const userId: number = Number(req.params.userId);
-  const result = await linksService.viewLinks(userId);
+  const urlId: string = String(req.params.urlId);
+
+  const result = await linksService.viewLinks(urlId);
   res.status(200).send(result);
 }
