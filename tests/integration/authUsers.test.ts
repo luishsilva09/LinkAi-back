@@ -25,4 +25,14 @@ describe("Users authentication ", () => {
   });
   it.todo("Do a login with new user");
   it.todo("Not exist user");
+  it("Do a login with new user", async () => {
+    const dataUser = userFactory.newUser();
+
+    await supertest(app).post("/users/signup").send(dataUser);
+    const result = await supertest(app)
+      .post("/users/signin")
+      .send({ email: dataUser.email, password: dataUser.password });
+
+    expect(result.status).toBe(200);
+  });
 });
