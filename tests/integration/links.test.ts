@@ -35,6 +35,7 @@ describe("Links tests /links", () => {
       .set(authUser);
 
     expect(result.status).toBe(201);
+    expect(result.body).not.toBe(null);
   });
   it.todo("Delete a link");
   it.todo("Get all links");
