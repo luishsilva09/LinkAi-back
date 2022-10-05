@@ -40,6 +40,5 @@ export async function deleteLink(linkId: number, userId: number) {
 
 export async function viewLinks(urlId: string) {
   const result = await linksRepositories.viewLinks(urlId);
-  console.log(result);
   return result;
 }

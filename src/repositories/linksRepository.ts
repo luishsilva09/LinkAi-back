@@ -35,11 +35,13 @@ export async function viewLinks(urlId: string) {
     },
     select: {
       name: true,
+      imageUrl: true,
       links: {
         select: {
           id: true,
           originalLink: true,
           tag: true,
+          previewImage: true,
         },
       },
     },
