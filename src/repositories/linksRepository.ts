@@ -9,7 +9,9 @@ export async function findLink(linkId: number) {
 }
 
 export async function create(linkData: IinsertLink, userId: number) {
-  await prisma.link.create({ data: { ...linkData, userId, acessCount: 0 } });
+  return await prisma.link.create({
+    data: { ...linkData, userId, acessCount: 0 },
+  });
 }
 export async function get(userId: number) {
   return await prisma.link.findMany({

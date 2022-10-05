@@ -4,8 +4,8 @@ import decodeToken from "../utils/decodeToken";
 
 export async function create(req: Request, res: Response) {
   const userInfo = decodeToken(req.headers.authorization);
-  await linksService.create(req.body, userInfo.id);
-  res.status(201).send("Criado com sucesso");
+  const result = await linksService.create(req.body, userInfo.id);
+  res.status(201).send(result);
 }
 export async function get(req: Request, res: Response) {
   const userInfo = decodeToken(req.headers.authorization);

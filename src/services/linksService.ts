@@ -20,7 +20,7 @@ export async function create(linkData: IlinkData, userId: number) {
     ...linkData,
     previewImage,
   };
-  await linksRepositories.create(insertData, userId);
+  return await linksRepositories.create(insertData, userId);
 }
 
 export async function get(userId: number) {
