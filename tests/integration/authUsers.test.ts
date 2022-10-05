@@ -23,8 +23,7 @@ describe("Users authentication ", () => {
     expect(result.status).toBe(201);
     expect(createdUser).not.toBe(null);
   });
-  it.todo("Do a login with new user");
-  it.todo("Not exist user");
+
   it("Do a login with new user", async () => {
     const dataUser = userFactory.newUser();
 
@@ -34,5 +33,14 @@ describe("Users authentication ", () => {
       .send({ email: dataUser.email, password: dataUser.password });
 
     expect(result.status).toBe(200);
+  });
+  it("Not exist user", async () => {
+    const { email, password } = userFactory.newUser();
+
+    const result = await supertest(app)
+      .post("/users/signin")
+      .send({ email, password });
+
+    expect(result.status).toBe(401);
   });
 });
