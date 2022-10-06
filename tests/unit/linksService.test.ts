@@ -3,6 +3,7 @@ import * as linksService from "../../src/services/linksService";
 import * as linksFactory from "../factories/linksFactory";
 import * as userFactory from "../factories/userFactory";
 import { Link } from "@prisma/client";
+import * as errorUtils from "../../src/utils/errorUtils";
 
 describe("Unit test on links services", () => {
   it("Crate new link", async () => {
@@ -54,7 +55,20 @@ describe("Unit test on links services", () => {
     expect(linksRepository.deleteLink).toBeCalled();
   });
 
-  it.todo("Not foun link data to delete");
+  it("Not found link data to delete", async () => {
+    const _userId = 1;
+    const _linkId = 1;
+
+    jest
+      .spyOn(linksRepository, "findLink")
+      .mockImplementationOnce((): any => {});
+
+    const promise = linksService.deleteLink(_linkId, _userId);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.notFoundError("Dado não encontrado")
+    );
+  });
   it.todo("User id and link is not from the same person");
   it.todo("Not foun user data");
   it.todo("Get links to view type");
