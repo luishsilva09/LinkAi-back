@@ -20,3 +20,18 @@ describe("Unit test on links services", () => {
     expect(linksRepository.findUser).toBeCalled();
     expect(linksRepository.create).toBeCalled();
   });
+  it("Get all links from user", async () => {
+    const userData = userFactory.newUser();
+    const _userId = 0;
+
+    jest
+      .spyOn(linksRepository, "findUser")
+      .mockImplementationOnce((): any => userData);
+
+    await linksService.get(_userId);
+
+    expect(linksRepository.findUser).toBeCalled();
+  });
+  it.todo("Delete link");
+  it.todo("Get links to view type");
+});
