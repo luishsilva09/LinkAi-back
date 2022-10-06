@@ -101,5 +101,15 @@ describe("Unit test on links services", () => {
       errorUtils.notFoundError("Dados não encontrados")
     );
   });
-  it.todo("Get links to view type");
+  it("Get links to view type", async () => {
+    const _urlId = "notExist";
+
+    jest
+      .spyOn(linksRepository, "viewLinks")
+      .mockImplementationOnce((): any => {});
+
+    await linksService.viewLinks(_urlId);
+
+    expect(linksRepository.viewLinks).toBeCalled();
+  });
 });
