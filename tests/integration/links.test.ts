@@ -65,4 +65,10 @@ describe("Links tests /links", () => {
     expect(result.status).toBe(200);
     expect(result.body).not.toBe(null);
   });
+  it("Not exist user view page", async () => {
+    const _notExistUserId = "0000";
+    const result = await supertest(app).get(`/links/${_notExistUserId}`);
+
+    expect(result.status).toBe(404);
+  });
 });
