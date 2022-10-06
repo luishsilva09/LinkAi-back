@@ -57,5 +57,15 @@ describe("Links tests /links", () => {
     expect(result.status).toBe(200);
     expect(deleted).toBe(null);
   });
-  it.todo("Get all links");
+  it("Get all links", async () => {
+    const linkData = linkFactory.newLink();
+    const token = await returnToken();
+    const authUser = { Authorization: `Bearer ${token}` };
+    await supertest(app).post("/links/create").send(linkData).set(authUser);
+
+    const result = await supertest(app).get("/links").set(authUser);
+
+    expect(result.status).toBe(200);
+    expect(result.body.length).toBe(1);
+  });
 });
