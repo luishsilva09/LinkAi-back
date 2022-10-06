@@ -88,6 +88,18 @@ describe("Unit test on links services", () => {
       errorUtils.unauthorizedError("Você não possui permissão para executar")
     );
   });
-  it.todo("Not foun user data");
+  it("Not foun user data", async () => {
+    const linkData = linksFactory.newLink();
+    const _userId = 0;
+    jest
+      .spyOn(linksRepository, "findUser")
+      .mockImplementationOnce((): any => {});
+
+    const promise = linksService.create(linkData, _userId);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.notFoundError("Dados não encontrados")
+    );
+  });
   it.todo("Get links to view type");
 });
