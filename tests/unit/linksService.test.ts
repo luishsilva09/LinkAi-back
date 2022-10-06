@@ -69,7 +69,25 @@ describe("Unit test on links services", () => {
       errorUtils.notFoundError("Dado não encontrado")
     );
   });
-  it.todo("User id and link is not from the same person");
+  it("User id and link is not from the same person", async () => {
+    const _userId = 1;
+    const _linkId = 1;
+    const linkData: Link = {
+      ...linksFactory.newLink(),
+      userId: 0,
+      id: _linkId,
+      acessCount: 0,
+      previewImage: "",
+    };
+
+    jest.spyOn(linksRepository, "findLink").mockResolvedValueOnce(linkData);
+
+    const promise = linksService.deleteLink(_linkId, _userId);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.unauthorizedError("Você não possui permissão para executar")
+    );
+  });
   it.todo("Not foun user data");
   it.todo("Get links to view type");
 });
