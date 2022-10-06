@@ -37,6 +37,25 @@ describe("Links tests /links", () => {
     expect(result.status).toBe(201);
     expect(result.body).not.toBe(null);
   });
-  it.todo("Delete a link");
+  it("Delete a link", async () => {
+    const linkData = linkFactory.newLink();
+    const token = await returnToken();
+    const authUser = { Authorization: `Bearer ${token}` };
+    const createdLink = await supertest(app)
+      .post("/links/create")
+      .send(linkData)
+      .set(authUser);
+
+    const result = await supertest(app)
+      .delete(`/links/${createdLink.body.id}`)
+      .set(authUser);
+
+    const deleted = await prisma.link.findUnique({
+      where: { id: createdLink.body.id },
+    });
+
+    expect(result.status).toBe(200);
+    expect(deleted).toBe(null);
+  });
   it.todo("Get all links");
 });
