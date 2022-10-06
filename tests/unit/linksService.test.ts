@@ -2,6 +2,7 @@ import * as linksRepository from "../../src/repositories/linksRepository";
 import * as linksService from "../../src/services/linksService";
 import * as linksFactory from "../factories/linksFactory";
 import * as userFactory from "../factories/userFactory";
+import { Link } from "@prisma/client";
 
 describe("Unit test on links services", () => {
   it("Crate new link", async () => {
