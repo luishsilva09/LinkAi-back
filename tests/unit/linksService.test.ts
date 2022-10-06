@@ -32,6 +32,29 @@ describe("Unit test on links services", () => {
 
     expect(linksRepository.findUser).toBeCalled();
   });
-  it.todo("Delete link");
+  it("Delete link", async () => {
+    const _userId = 1;
+    const _linkId = 1;
+    const linkData: Link = {
+      ...linksFactory.newLink(),
+      userId: _userId,
+      id: _linkId,
+      acessCount: 0,
+      previewImage: "",
+    };
+
+    jest.spyOn(linksRepository, "findLink").mockResolvedValueOnce(linkData);
+
+    jest.spyOn(linksRepository, "deleteLink").mockResolvedValueOnce();
+
+    await linksService.deleteLink(_linkId, _userId);
+
+    expect(linksRepository.findLink).toBeCalled();
+    expect(linksRepository.deleteLink).toBeCalled();
+  });
+
+  it.todo("Not foun link data to delete");
+  it.todo("User id and link is not from the same person");
+  it.todo("Not foun user data");
   it.todo("Get links to view type");
 });
