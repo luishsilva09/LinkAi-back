@@ -47,4 +47,15 @@ describe("Unit test to auth service", () => {
       errorUtils.unauthorizedError("Não autorizado")
     );
   });
+
+  it("Signin wrong email", async () => {
+    const userData = userFactory.newUser();
+    jest.spyOn(authRepository, "find").mockImplementationOnce((): any => {});
+
+    const promise = authService.signin(userData);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.unauthorizedError("Verifique seus dados")
+    );
+  });
 });
