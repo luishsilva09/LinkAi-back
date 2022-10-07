@@ -5,6 +5,16 @@ import * as userFactory from "../factories/userFactory";
 import { Link } from "@prisma/client";
 import * as errorUtils from "../../src/utils/errorUtils";
 
+import { prisma } from "../../src/dbStrategy/database";
+
+beforeEach(async () => {
+  await prisma.$executeRaw`TRUNCATE TABLE users CASCADE`;
+});
+
+afterAll(() => {
+  prisma.$disconnect();
+});
+
 describe("Unit test on links services", () => {
   it("Crate new link", async () => {
     const linkData = linksFactory.newLink();
