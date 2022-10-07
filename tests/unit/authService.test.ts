@@ -3,7 +3,16 @@ import * as authService from "../../src/services/authService";
 import * as userFactory from "../factories/userFactory";
 import bcrypt from "bcrypt";
 import { signinData } from "../../src/types/authTypes";
+import * as errorUtils from "../../src/utils/errorUtils";
+import { prisma } from "../../src/dbStrategy/database";
 
+beforeEach(async () => {
+  await prisma.$executeRaw`TRUNCATE TABLE users CASCADE`;
+});
+
+afterAll(() => {
+  prisma.$disconnect();
+});
 describe("Unit test to auth service", () => {
   it("Create a new user", async () => {
     const userData = userFactory.newUser();
@@ -36,6 +45,7 @@ describe("Unit test to auth service", () => {
     expect(promise).not.toBe(null);
     expect(authRepository.find).toBeCalled();
   });
+
   it("Error to exist user to create same email", async () => {
     const userData = { ...userFactory.newUser(), id: 0, urlId: "null" };
 
