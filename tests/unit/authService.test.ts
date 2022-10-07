@@ -17,3 +17,23 @@ describe("Unit test to auth service", () => {
     expect(authRepository.find).toBeCalled();
     expect(authRepository.create).toBeCalled();
   });
+  it("Signin to with user", async () => {
+    const userData = userFactory.newUser();
+    const cryptPassword = bcrypt.hashSync(userData.password, 10);
+    const signin: signinData = {
+      name: userData.name,
+      email: userData.email,
+      password: cryptPassword,
+      repeatPassword: cryptPassword,
+      imageUrl: userData.imageUrl,
+    };
+
+    jest
+      .spyOn(authRepository, "find")
+      .mockImplementationOnce((): any => signin);
+    const promise = await authService.signin(userData);
+
+    expect(promise).not.toBe(null);
+    expect(authRepository.find).toBeCalled();
+  });
+});
