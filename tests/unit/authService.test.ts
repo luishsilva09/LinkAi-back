@@ -68,4 +68,23 @@ describe("Unit test to auth service", () => {
       errorUtils.unauthorizedError("Verifique seus dados")
     );
   });
+  it("Wrong passwor to login", async () => {
+    const userData = userFactory.newUser();
+    const signin: signinData = {
+      name: userData.name,
+      email: userData.email,
+      password: "_password",
+      repeatPassword: "_password",
+      imageUrl: userData.imageUrl,
+    };
+
+    jest
+      .spyOn(authRepository, "find")
+      .mockImplementationOnce((): any => signin);
+    const promise = authService.signin(userData);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.unauthorizedError("Verifique seus dados")
+    );
+  });
 });
