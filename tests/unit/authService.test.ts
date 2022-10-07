@@ -36,4 +36,15 @@ describe("Unit test to auth service", () => {
     expect(promise).not.toBe(null);
     expect(authRepository.find).toBeCalled();
   });
+  it("Error to exist user to create same email", async () => {
+    const userData = { ...userFactory.newUser(), id: 0, urlId: "null" };
+
+    jest.spyOn(authRepository, "find").mockResolvedValueOnce(userData);
+
+    const promise = authService.signup(userData);
+
+    expect(promise).rejects.toEqual(
+      errorUtils.unauthorizedError("Não autorizado")
+    );
+  });
 });
