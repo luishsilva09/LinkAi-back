@@ -9,7 +9,7 @@ const routes = Router();
 routes.use(authRoutes);
 routes.use(linksRoute);
 if (process.env.NODE_ENV === "test") {
-  console.log("oii");
+  console.log("Test mode to front");
   routes.use(e2eRoutes);
 }
 
