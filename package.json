@@ -2,12 +2,12 @@
   "name": "linkai-back",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test -- jest -i --coverage",
     "dev": "nodemon ./src/server.ts",
-    "build": "tsc",
+    "start": "node dist/src/server.js",
+    "build": "tsc && npx prisma migrate deploy",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit",
     "test:integration": "dotenv -e .env.test jest -- -i --testPathPattern=tests/integration"
   },
