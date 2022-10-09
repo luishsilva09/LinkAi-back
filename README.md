@@ -17,6 +17,8 @@
 
 # Description
 
+This is a solution to organize and group links easily and efficiently.
+
 # Fatures
 
 - Signup and signin
