@@ -227,6 +227,12 @@ Configuration and create database:
 
 ```
 
+To run dev mode:
+
+```bash
+    npm run dev
+```
+
 To run:
 
 ```bash
