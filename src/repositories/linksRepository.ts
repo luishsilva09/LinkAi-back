@@ -49,3 +49,14 @@ export async function viewLinks(urlId: string) {
     },
   });
 }
+
+export async function acessCount(linkId: number) {
+  return await prisma.link.update({
+    where: { id: linkId },
+    data: {
+      acessCount: {
+        increment: 1,
+      },
+    },
+  });
+}
