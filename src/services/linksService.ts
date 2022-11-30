@@ -42,3 +42,12 @@ export async function viewLinks(urlId: string) {
   const result = await linksRepositories.viewLinks(urlId);
   return result;
 }
+
+export async function acessCount(linkId: number) {
+  const linkData = await linksRepositories.findLink(linkId);
+
+  if (!linkData) throw notFoundError("Dado não encontrado");
+
+  const result = await linksRepositories.acessCount(linkId);
+  return result;
+}
