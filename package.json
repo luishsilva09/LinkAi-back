@@ -6,7 +6,7 @@
   "scripts": {
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test -- jest -i --coverage",
     "dev": "nodemon ./src/server.ts",
-    "start": "node dist/src/server.js",
+    "start": "npm run prisma:deploy && node dist/src/server.js",
     "deploy": "node server.js ",
     "build": "tsc",
     "prisma:deploy": "prisma migrate deploy",
