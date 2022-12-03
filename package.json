@@ -7,7 +7,7 @@
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test -- jest -i --coverage",
     "dev": "nodemon ./src/server.ts",
     "start": "npm run prisma:deploy && node dist/src/server.js",
-    "deploy": "node dist/src/server.js ",
+    "deploy": "tsc && node dist/src/server.js ",
     "build": "tsc",
     "prisma:deploy": "prisma migrate deploy",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit",
