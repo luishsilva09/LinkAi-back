@@ -10,7 +10,14 @@ async function findUser(userId: number) {
 }
 
 export async function create(linkData: IlinkData, userId: number) {
-  await findUser(userId);
+  const MAX_LINKS = 5;
+  const userData = await findUser(userId);
+  const linksUser = await get(userData.id);
+
+  if (linksUser.length >= MAX_LINKS) {
+    throw unauthorizedError("Quantidade maxima de links já foi atingido");
+  }
+
   const previewImage = await urlMetadata(linkData.originalLink).then(
     (result) => {
       return result.image;
