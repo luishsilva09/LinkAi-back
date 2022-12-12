@@ -5,9 +5,33 @@ import dotenv from "dotenv";
 import { v4 as uuid } from "uuid";
 import { IuserData, signinData } from "../types/authTypes";
 import { unauthorizedError } from "../utils/errorUtils";
+import sgMail from "@sendgrid/mail";
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY || "muitosecreto";
+
+async function sendEmail(email: string) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+
+  const msg = {
+    to: email,
+    from: "luishsilva09@gmail.com", // Use the email address or domain you verified above
+    subject: "Seja bem vindo",
+    text: "Seja muito bem vindo ao LinkAí",
+  };
+  sgMail.send(msg).then(
+    () => {
+      console.log("enviado");
+    },
+    (error) => {
+      console.error(error);
+
+      if (error.response) {
+        console.error(error.response.body);
+      }
+    }
+  );
+}
 
 async function findUser(email: string) {
   return await authRepository.find(email);
@@ -25,7 +49,9 @@ export async function signup(newUserData: IuserData) {
     urlId: uuid(),
     imageUrl: newUserData.imageUrl,
   };
+
   await authRepository.create(insertData);
+  await sendEmail(newUserData.email);
 }
 
 export async function signin(signinData: signinData) {

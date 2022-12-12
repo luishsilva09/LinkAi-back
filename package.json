@@ -25,6 +25,7 @@
   "homepage": "https://github.com/luishsilva09/LinkAi-back#readme",
   "dependencies": {
     "@prisma/client": "^4.4.0",
+    "@sendgrid/mail": "^7.7.0",
     "@types/bcrypt": "^5.0.0",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
