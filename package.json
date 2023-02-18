@@ -9,7 +9,7 @@
     "start": "npm run prisma:deploy && node dist/src/server.js",
     "deploy": "tsc && node dist/src/server.js ",
     "build": "tsc",
-    "prisma:deploy": "prisma migrate deploy",
+    "prisma:deploy": "prisma migrate dev",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit",
     "test:integration": "dotenv -e .env.test jest -- -i --testPathPattern=tests/integration"
   },
