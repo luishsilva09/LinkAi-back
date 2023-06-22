@@ -51,7 +51,6 @@ export async function signup(newUserData: IuserData) {
   };
 
   await authRepository.create(insertData);
-  await sendEmail(newUserData.email);
 }
 
 export async function signin(signinData: signinData) {
